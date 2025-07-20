@@ -12,7 +12,14 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export function ModeToggle() {
+/**
+ * Theme toggle button for switching between light, dark, and system themes.
+ * Uses next-themes for theme management and lucide-react for icons.
+ *
+ * @function ModeToggle
+ * @returns {JSX.Element} Dropdown menu with theme options and toggle button
+ */
+const ModeToggle = () => {
 	const { setTheme } = useTheme();
 
 	return (
@@ -34,4 +41,6 @@ export function ModeToggle() {
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
-}
+};
+
+export default ModeToggle;
