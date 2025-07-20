@@ -8,14 +8,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import StatCard from '@/app/StatCard';
 
-// Mock data for stat cards
 /**
- * @typedef {Object} StatCardMock
- * @property {string} description - Card description
- * @property {string|number} value - Main value
- * @property {React.ReactNode} badge - Badge content (icon + text)
- * @property {React.ReactNode} footerMain - Main footer content
- * @property {string} footerSub - Subtext for the footer
+ * Array of mock data for stat cards displayed in the dashboard section.
+ * Each object represents a card's content and visuals.
  */
 const statCards = [
 	{
@@ -84,7 +79,13 @@ const statCards = [
 	},
 ];
 
-export function SectionCards() {
+/**
+ * Renders a grid of StatCard components using mock data for dashboard metrics.
+ *
+ * @function SectionCards
+ * @returns- Grid of StatCard components for dashboard overview
+ */
+const SectionCards = () => {
 	return (
 		<div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4'>
 			{statCards.map((card, i) => (
@@ -95,4 +96,6 @@ export function SectionCards() {
 			))}
 		</div>
 	);
-}
+};
+
+export default SectionCards;
