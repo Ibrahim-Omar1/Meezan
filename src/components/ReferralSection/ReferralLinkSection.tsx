@@ -2,13 +2,14 @@
 
 import { useId, useRef, useState, useEffect } from 'react';
 import { CheckIcon, CopyIcon, Share2Icon, SmartphoneIcon } from 'lucide-react';
-import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { useShareLink } from '@/hooks/useShareLink';
 
 /**
  * Props for the ReferralLinkSection component
@@ -28,11 +29,16 @@ const ReferralLinkSection = ({
 	referralLink = 'https://app.example.com/ref/john-doe-abc123',
 }: ReferralLinkSectionProps) => {
 	const id = useId();
-	const [copied, setCopied] = useState<boolean>(false);
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [canShare, setCanShare] = useState<boolean>(false);
-	const [isSharing, setIsSharing] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement>(null);
+
+	// Custom hooks for mutations
+	const { mutate: copy, copied } = useCopyToClipboard();
+	const { mutate: share, isPending: isSharing } = useShareLink({
+		url: referralLink,
+		canShare,
+	});
 
 	useEffect(() => {
 		// Detect mobile device
@@ -61,73 +67,17 @@ const ReferralLinkSection = ({
 	/**
 	 * Handles copying the referral link to clipboard
 	 */
-	const handleCopy = async () => {
+	const handleCopy = () => {
 		if (inputRef.current) {
-			try {
-				await navigator.clipboard.writeText(inputRef.current.value);
-				setCopied(true);
-				toast.success('Referral link copied to clipboard!', {
-					description: 'Share it with your friends to start earning rewards',
-					duration: 3000,
-				});
-				setTimeout(() => setCopied(false), 2000);
-			} catch (err) {
-				// Fallback for older browsers
-				inputRef.current.select();
-				document.execCommand('copy');
-				setCopied(true);
-				toast.success('Referral link copied to clipboard!', {
-					description: 'Share it with your friends to start earning rewards',
-					duration: 3000,
-				});
-				setTimeout(() => setCopied(false), 2000);
-			}
+			copy(inputRef.current.value);
 		}
 	};
 
 	/**
 	 * Handles sharing the referral link using native share API or fallback to copy
 	 */
-	const handleShare = async () => {
-		if (canShare && navigator.share) {
-			try {
-				setIsSharing(true);
-
-				await navigator.share({
-					title: 'Join me on this amazing platform!',
-					text: 'Use my referral link to get started and we both get rewards!',
-					url: referralLink,
-				});
-
-				toast.success('Thanks for sharing!', {
-					description: 'Your referral link has been shared successfully',
-					duration: 3000,
-				});
-			} catch (err: unknown) {
-				const error = err as Error;
-				if (error.name === 'AbortError') {
-					// User cancelled sharing - no need to show error
-					return;
-				} else {
-					toast.error('Share failed', {
-						description: 'Copying link to clipboard instead',
-						duration: 3000,
-					});
-					handleCopy();
-				}
-			} finally {
-				setIsSharing(false);
-			}
-		} else {
-			// Fallback to copy
-			if (!canShare) {
-				toast.info('Native sharing not available', {
-					description: 'Copying link to clipboard instead',
-					duration: 3000,
-				});
-			}
-			handleCopy();
-		}
+	const handleShare = () => {
+		share();
 	};
 
 	return (

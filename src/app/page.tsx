@@ -1,5 +1,5 @@
 import SectionCards from '@/components/section-cards';
-import ReferralSection from '@/components/referral-section';
+import ReferralSection from '@/components/ReferralSection/ReferralSection';
 
 export default function Page() {
 	return (

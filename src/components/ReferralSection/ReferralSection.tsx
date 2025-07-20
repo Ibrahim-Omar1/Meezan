@@ -1,5 +1,5 @@
-import RecentReferralsSection from './recent-referrals-section';
-import ReferralLinkSection from './referral-link-section';
+import RecentReferralsSection from './RecentReferralsSection';
+import ReferralLinkSection from './ReferralLinkSection';
 
 /**
  * Main referral section component that combines referral link and recent referrals
