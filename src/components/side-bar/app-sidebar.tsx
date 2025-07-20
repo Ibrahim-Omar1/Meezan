@@ -4,6 +4,7 @@ import * as React from 'react';
 import {
 	IconCamera,
 	IconChartBar,
+	IconCoin,
 	IconDashboard,
 	IconDatabase,
 	IconFileAi,
@@ -20,9 +21,9 @@ import {
 } from '@tabler/icons-react';
 
 import { NavDocuments } from '@/components/side-bar/nav-documents';
-import { NavMain } from '@/components/side-bar/nav-main';
+import NavMain from '@/components/side-bar/nav-main';
 import { NavSecondary } from '@/components/side-bar/nav-secondary';
-import { NavUser } from '@/components/side-bar/nav-user';
+import NavUser from '@/components/side-bar/nav-user';
 import {
 	Sidebar,
 	SidebarContent,
@@ -35,91 +36,76 @@ import {
 
 const data = {
 	user: {
-		name: 'shadcn',
-		email: 'm@example.com',
-		avatar: '/avatars/shadcn.jpg',
+		name: 'Ibrahim Omar',
+		email: 'ebrahimamra69@gmail.com',
+		avatar: '/avatars/ibrahimomar.jpg',
 	},
 	navMain: [
 		{
-			title: 'Dashboard',
-			url: '#',
-			icon: IconDashboard,
-		},
-		{
-			title: 'Lifecycle',
-			url: '#',
-			icon: IconListDetails,
-		},
-		{
-			title: 'Analytics',
-			url: '#',
-			icon: IconChartBar,
-		},
-		{
-			title: 'Projects',
-			url: '#',
-			icon: IconFolder,
-		},
-		{
-			title: 'Team',
+			title: 'Referrals',
 			url: '#',
 			icon: IconUsers,
 		},
-	],
-	navClouds: [
 		{
-			title: 'Capture',
-			icon: IconCamera,
-			isActive: true,
+			title: 'Rewards',
 			url: '#',
-			items: [
-				{
-					title: 'Active Proposals',
-					url: '#',
-				},
-				{
-					title: 'Archived',
-					url: '#',
-				},
-			],
+			icon: IconCoin,
 		},
 		{
-			title: 'Proposal',
-			icon: IconFileDescription,
+			title: 'Tasks',
 			url: '#',
-			items: [
-				{
-					title: 'Active Proposals',
-					url: '#',
-				},
-				{
-					title: 'Archived',
-					url: '#',
-				},
-			],
-		},
-		{
-			title: 'Prompts',
-			icon: IconFileAi,
-			url: '#',
-			items: [
-				{
-					title: 'Active Proposals',
-					url: '#',
-				},
-				{
-					title: 'Archived',
-					url: '#',
-				},
-			],
+			icon: IconListDetails,
 		},
 	],
+	// navClouds: [
+	// 	{
+	// 		title: 'Capture',
+	// 		icon: IconCamera,
+	// 		isActive: true,
+	// 		url: '#',
+	// 		items: [
+	// 			{
+	// 				title: 'Active Proposals',
+	// 				url: '#',
+	// 			},
+	// 			{
+	// 				title: 'Archived',
+	// 				url: '#',
+	// 			},
+	// 		],
+	// 	},
+	// 	{
+	// 		title: 'Proposal',
+	// 		icon: IconFileDescription,
+	// 		url: '#',
+	// 		items: [
+	// 			{
+	// 				title: 'Active Proposals',
+	// 				url: '#',
+	// 			},
+	// 			{
+	// 				title: 'Archived',
+	// 				url: '#',
+	// 			},
+	// 		],
+	// 	},
+	// 	{
+	// 		title: 'Prompts',
+	// 		icon: IconFileAi,
+	// 		url: '#',
+	// 		items: [
+	// 			{
+	// 				title: 'Active Proposals',
+	// 				url: '#',
+	// 			},
+	// 			{
+	// 				title: 'Archived',
+	// 				url: '#',
+	// 			},
+	// 		],
+	// 	},
+	// ],
 	navSecondary: [
-		{
-			title: 'Settings',
-			url: '#',
-			icon: IconSettings,
-		},
 		{
 			title: 'Get Help',
 			url: '#',
@@ -131,23 +117,23 @@ const data = {
 			icon: IconSearch,
 		},
 	],
-	documents: [
-		{
-			name: 'Data Library',
-			url: '#',
-			icon: IconDatabase,
-		},
-		{
-			name: 'Reports',
-			url: '#',
-			icon: IconReport,
-		},
-		{
-			name: 'Word Assistant',
-			url: '#',
-			icon: IconFileWord,
-		},
-	],
+	// documents: [
+	// 	{
+	// 		name: 'Data Library',
+	// 		url: '#',
+	// 		icon: IconDatabase,
+	// 	},
+	// 	{
+	// 		name: 'Reports',
+	// 		url: '#',
+	// 		icon: IconReport,
+	// 	},
+	// 	{
+	// 		name: 'Word Assistant',
+	// 		url: '#',
+	// 		icon: IconFileWord,
+	// 	},
+	// ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -165,7 +151,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						>
 							<a href='#'>
 								<IconInnerShadowTop className='!size-5' />
-								<span className='text-base font-semibold'>Acme Inc.</span>
+								<span className='text-base font-semibold'>AI Sharia Law</span>
 							</a>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
@@ -173,7 +159,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={data.navMain} />
-				<NavDocuments items={data.documents} />
+				{/* <NavDocuments items={data.documents} /> */}
 				<NavSecondary
 					items={data.navSecondary}
 					className='mt-auto'
