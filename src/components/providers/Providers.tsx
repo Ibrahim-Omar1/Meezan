@@ -1,6 +1,8 @@
+'use client';
 import React from 'react';
 import SidebarProviderComponent from './SidebarProvider';
 import ThemeProvider from './ThemeProvider';
+import ReactQueryProvider from './ReactQueryProvider';
 
 /**
  * Providers component for the application.
@@ -12,14 +14,16 @@ import ThemeProvider from './ThemeProvider';
  */
 const Providers = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<ThemeProvider
-			attribute='class'
-			defaultTheme='system'
-			enableSystem
-			disableTransitionOnChange
-		>
-			<SidebarProviderComponent>{children}</SidebarProviderComponent>
-		</ThemeProvider>
+		<ReactQueryProvider>
+			<ThemeProvider
+				attribute='class'
+				defaultTheme='system'
+				enableSystem
+				disableTransitionOnChange
+			>
+				<SidebarProviderComponent>{children}</SidebarProviderComponent>
+			</ThemeProvider>
+		</ReactQueryProvider>
 	);
 };
 
